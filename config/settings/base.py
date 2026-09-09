@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 from datetime import timedelta
+import dj_database_url
 
 from dotenv import load_dotenv
 
@@ -10,7 +11,12 @@ load_dotenv(BASE_DIR / ".env")
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "development-only-change-me")
 DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() == "true"
-ALLOWED_HOSTS = [host.strip() for host in os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",") if host.strip()]
+
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    ".onrender.com",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -41,6 +47,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -118,3 +125,7 @@ SPECTACULAR_SETTINGS = {
 }
 
 CORS_ALLOWED_ORIGINS = [origin.strip() for origin in os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:5500").split(",") if origin.strip()]
+
+
+STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
