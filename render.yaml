@@ -20,7 +20,7 @@ services:
       - key: CREATE_SUPERUSER
         value: "true"
       - key: DJANGO_SUPERUSER_USERNAME
-        value: admin
+        value: Admin
       - key: DJANGO_SUPERUSER_EMAIL
         value: admin@socialworkersforum.org
       - key: DJANGO_SUPERUSER_PASSWORD
