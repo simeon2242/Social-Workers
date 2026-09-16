@@ -17,6 +17,14 @@ services:
         value: https://social-workers-forum.netlify.app
       - key: SEED_DEMO
         value: "true"
+      - key: CREATE_SUPERUSER
+        value: "true"
+      - key: DJANGO_SUPERUSER_USERNAME
+        value: admin
+      - key: DJANGO_SUPERUSER_EMAIL
+        value: admin@socialworkersforum.org
+      - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false
       - key: POSTGRES_SSL
         value: "true"
       - key: DATABASE_URL
