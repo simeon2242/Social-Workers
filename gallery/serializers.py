@@ -1,9 +1,11 @@
 from rest_framework import serializers
 
+from website.serializers import OptionalFieldsMixin
+
 from .models import GalleryItem
 
 
-class GalleryItemSerializer(serializers.ModelSerializer):
+class GalleryItemSerializer(OptionalFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = GalleryItem
         fields = "__all__"

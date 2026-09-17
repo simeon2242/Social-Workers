@@ -1,9 +1,11 @@
 from rest_framework import serializers
 
+from website.serializers import OptionalFieldsMixin
+
 from .models import Project
 
 
-class ProjectSerializer(serializers.ModelSerializer):
+class ProjectSerializer(OptionalFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = "__all__"

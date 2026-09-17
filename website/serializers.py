@@ -3,42 +3,55 @@ from rest_framework import serializers
 from .models import AboutSection, CoreValue, FooterSettings, LandingPage, SiteSettings, VisionMission
 
 
-class SiteSettingsSerializer(serializers.ModelSerializer):
+class OptionalFieldsMixin:
+    """Rend tous les champs facultatifs (aucun champ obligatoire)."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            if getattr(field, "read_only", False):
+                continue
+            field.required = False
+            if isinstance(field, serializers.CharField):
+                field.allow_blank = True
+            if isinstance(field, serializers.FileField):
+                field.allow_null = True
+
+
+class SiteSettingsSerializer(OptionalFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = SiteSettings
         fields = ["id", "organization_name", "description", "email", "phone", "address", "whatsapp_url", "facebook_url", "instagram_url", "linkedin_url", "updated_at"]
 
 
-class LandingPageSerializer(serializers.ModelSerializer):
+class LandingPageSerializer(OptionalFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = LandingPage
         fields = "__all__"
 
 
-class AboutSectionSerializer(serializers.ModelSerializer):
+class AboutSectionSerializer(OptionalFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = AboutSection
         fields = "__all__"
 
 
-class VisionMissionSerializer(serializers.ModelSerializer):
+class VisionMissionSerializer(OptionalFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = VisionMission
         fields = "__all__"
 
     def validate_title(self, value):
-        if not value.strip():
-            raise serializers.ValidationError("Le titre ne peut pas etre vide.")
-        return value.strip()
+        return value.strip() if value else value
 
 
-class CoreValueSerializer(serializers.ModelSerializer):
+class CoreValueSerializer(OptionalFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = CoreValue
         fields = "__all__"
 
 
-class FooterSettingsSerializer(serializers.ModelSerializer):
+class FooterSettingsSerializer(OptionalFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = FooterSettings
         fields = "__all__"

@@ -1,9 +1,11 @@
 from rest_framework import serializers
 
+from website.serializers import OptionalFieldsMixin
+
 from .models import TeamMember
 
 
-class TeamMemberSerializer(serializers.ModelSerializer):
+class TeamMemberSerializer(OptionalFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = TeamMember
         fields = "__all__"

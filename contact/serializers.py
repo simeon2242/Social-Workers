@@ -1,9 +1,11 @@
 from rest_framework import serializers
 
+from website.serializers import OptionalFieldsMixin
+
 from .models import ContactInformation, ContactMessage
 
 
-class ContactInformationSerializer(serializers.ModelSerializer):
+class ContactInformationSerializer(OptionalFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = ContactInformation
         fields = "__all__"
