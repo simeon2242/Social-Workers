@@ -27,5 +27,15 @@ services:
         sync: false
       - key: POSTGRES_SSL
         value: "true"
+      - key: AWS_STORAGE_BUCKET_NAME
+        sync: false
+      - key: AWS_S3_ENDPOINT_URL
+        value: https://s3.us-west-004.backblazeb2.com
+      - key: AWS_S3_REGION_NAME
+        value: us-west-004
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
       - key: DATABASE_URL
         sync: false
