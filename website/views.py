@@ -22,23 +22,43 @@ class SiteSettingsViewSet(PublicContentViewSet):
 
 
 class LandingPageViewSet(PublicContentViewSet):
-    queryset = LandingPage.objects.filter(is_active=True)
     serializer_class = LandingPageSerializer
+
+    def get_queryset(self):
+        queryset = LandingPage.objects.all()
+        if self.request.user.is_anonymous:
+            queryset = queryset.filter(is_active=True)
+        return queryset
 
 
 class AboutSectionViewSet(PublicContentViewSet):
-    queryset = AboutSection.objects.filter(is_active=True)
     serializer_class = AboutSectionSerializer
+
+    def get_queryset(self):
+        queryset = AboutSection.objects.all()
+        if self.request.user.is_anonymous:
+            queryset = queryset.filter(is_active=True)
+        return queryset
 
 
 class VisionMissionViewSet(PublicContentViewSet):
-    queryset = VisionMission.objects.filter(is_active=True)
     serializer_class = VisionMissionSerializer
+
+    def get_queryset(self):
+        queryset = VisionMission.objects.all()
+        if self.request.user.is_anonymous:
+            queryset = queryset.filter(is_active=True)
+        return queryset
 
 
 class CoreValueViewSet(PublicContentViewSet):
-    queryset = CoreValue.objects.filter(is_active=True)
     serializer_class = CoreValueSerializer
+
+    def get_queryset(self):
+        queryset = CoreValue.objects.all()
+        if self.request.user.is_anonymous:
+            queryset = queryset.filter(is_active=True)
+        return queryset
 
 
 class FooterSettingsViewSet(PublicContentViewSet):

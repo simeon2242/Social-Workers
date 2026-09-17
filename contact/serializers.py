@@ -13,7 +13,12 @@ class ContactMessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactMessage
         fields = "__all__"
-        read_only_fields = ("is_read", "created_at")
+        read_only_fields = ("created_at",)
+
+    def validate(self, attrs):
+        if self.instance is None:
+            attrs["is_read"] = False
+        return attrs
 
     def validate_full_name(self, value):
         value = value.strip()
