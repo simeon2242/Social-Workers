@@ -6,7 +6,7 @@ from .models import AboutSection, CoreValue, FooterSettings, LandingPage, SiteSe
 class SiteSettingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = SiteSettings
-        fields = "__all__"
+        fields = ["id", "organization_name", "description", "email", "phone", "address", "whatsapp_url", "facebook_url", "instagram_url", "linkedin_url", "updated_at"]
 
 
 class LandingPageSerializer(serializers.ModelSerializer):
