@@ -11,5 +11,17 @@ htmlcov/
 staticfiles/
 media/*
 !media/.gitkeep
+!media/blog/
+!media/blog/*
+!media/events/
+!media/events/*
+!media/gallery/
+!media/gallery/*
+!media/landing/
+!media/landing/*
+!media/projects/
+!media/projects/*
+!media/team/
+!media/team/*
 .vscode/
 node_modules/
